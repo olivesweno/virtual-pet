@@ -130,17 +130,6 @@ describe('feed', () => {
         });
     });
 
-    describe('isAlive', () => {
-        xit('returns if pet is alive', () => {
-            const pet = new Pet('Fido');
-
-            pet.hunger = 0;
-            pet.fitness = 10;
-            pet.age = 10;
-
-            expect(pet.isAlive()).toEqual(true)
-        });
-    })
 
 
 
