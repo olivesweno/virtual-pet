@@ -27,9 +27,26 @@ describe('construtor', () => {
         const pet = new Pet('Fido');
         
         expect(pet.hunger).toEqual(0);
-    })
+    });
+    it('returns if pet is alive', () => {
+        const pet = new Pet('Fido');
+
+        pet.age = 30;
+        pet.fitness = 10;
+        pet.hunger = 0;
+
+        expect(pet.isAlive).toEqual(false)
+    });
 });
 describe('growUp', () => {
+    it('throws error if pet is not alive', () => {
+        const pet = new Pet('Fido');
+
+        pet.age = 30;
+
+        expect(() => pet.growUp()).toThrow('Your pet is no longer alive');
+    });
+
     it('increments the age by 1', () => {
         const pet = new Pet('Fido');
 
@@ -56,6 +73,14 @@ describe('growUp', () => {
 });
 
 describe('walk', () => {
+    it('throws an error if pet is not alive', () => {
+        const pet = new Pet('Fido')
+
+        pet.age = 30;
+
+        expect(() => pet.walk()).toThrow('Your pet is no longer alive')
+    });
+
     it('increases fitness by 4', () => {
         const pet = new Pet('Fido');
 
@@ -76,6 +101,14 @@ describe('walk', () => {
 });
 
 describe('feed', () => {
+    it('throws an error if pet is not alive', () => {
+        const pet = new Pet('Fido')
+
+        pet.age = 30;
+
+        expect(() => pet.feed()).toThrow('Your pet is no longer alive')
+    });
+
     it('decreases hunger by 3', () => {
         const pet = new Pet('Fido');
 
@@ -95,6 +128,14 @@ describe('feed', () => {
     });
 });
     describe('checkup', () => {
+        it('throws an error if pet is not alive', () => {
+            const pet = new Pet('Fido')
+    
+            pet.age = 30;
+    
+            expect(() => pet.checkup()).toThrow('Your pet is no longer alive')
+        });
+
         it('returns string if fitness is 3 or less', () => {
             const pet = new Pet('Fido');
 
@@ -114,7 +155,7 @@ describe('feed', () => {
         it('returns string if hungry and needs walk', () => {
             const pet = new Pet('Fido');
 
-            pet.hunger = 10;
+            pet.hunger = 9;
             pet.fitness = 1;
 
             expect(pet.checkup()).toEqual('I am hungry AND I need a walk')
